@@ -6,13 +6,13 @@ class Space {
   final int price;
   final String imageUrl;
   final int rating;
-  final String address;
-  final String phone;
-  final String mapUrl;
-  final List<String> photos;
-  final int numberOfKitchens;
-  final int numberOfBedrooms;
-  final int numberOfCupboards;
+  String address;
+  String phone;
+  String mapUrl;
+  List<String> photos;
+  int numberOfKitchens;
+  int numberOfBedrooms;
+  int numberOfCupboards;
 
   Space({
     required this.id,
@@ -22,13 +22,13 @@ class Space {
     required this.price,
     required this.imageUrl,
     required this.rating,
-    required this.address,
-    required this.phone,
-    required this.mapUrl,
-    required this.photos,
-    required this.numberOfKitchens,
-    required this.numberOfBedrooms,
-    required this.numberOfCupboards,
+    this.address = "",
+    this.phone = "",
+    this.mapUrl = "",
+    this.photos = const [],
+    this.numberOfKitchens = 0,
+    this.numberOfBedrooms = 0,
+    this.numberOfCupboards = 0,
   });
 
   factory Space.fromJson(Map<String, dynamic> json) => Space(
