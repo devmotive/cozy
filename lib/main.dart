@@ -1,4 +1,5 @@
 import 'package:cozy/theme/colors.dart';
+import 'package:cozy/theme/typography.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -15,6 +16,18 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: kWhiteColor,
         textTheme: GoogleFonts.poppinsTextTheme(),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            textStyle: TextStyle(
+              color: kWhiteColor,
+              fontSize: 18,
+              fontWeight: medium,
+            ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+          ),
+        ),
       ),
     );
   }
