@@ -1,4 +1,5 @@
 import 'package:cozy/generated/assets.dart';
+import 'package:cozy/pages/home_page.dart';
 import 'package:cozy/theme/colors.dart';
 import 'package:cozy/theme/typography.dart';
 import 'package:flutter/material.dart';
@@ -13,13 +14,14 @@ class StartedPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
+        spacing: 24,
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [_buildContent(), SizedBox(height: 24), _buildSplashImage()],
+        children: [_buildContent(context), _buildSplashImage()],
       ),
     );
   }
 
-  Widget _buildContent() {
+  Widget _buildContent(BuildContext context) {
     return Padding(
       padding: EdgeInsetsGeometry.only(left: 30),
       child: Column(
@@ -30,7 +32,7 @@ class StartedPage extends StatelessWidget {
           SizedBox(height: 10),
           _buildSubtitle(),
           SizedBox(height: 40),
-          _buildExploreButton(),
+          _buildExploreButton(context),
         ],
       ),
     );
@@ -67,13 +69,16 @@ class StartedPage extends StatelessWidget {
   }
 
   // _buildExploreButton provides a call-to-action for users to proceed.
-  Widget _buildExploreButton() {
+  Widget _buildExploreButton(BuildContext context) {
     return SizedBox(
       width: 210,
       height: 50,
       child: ElevatedButton(
-        // TODO: Implement navigation to the next screen (e.g., HomePage).
-        onPressed: () {},
+        onPressed: () => Navigator.pushNamedAndRemoveUntil(
+          context,
+          HomePage.routeName,
+          (route) => false,
+        ),
         child: Text('Explore Now'),
       ),
     );
