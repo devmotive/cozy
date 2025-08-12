@@ -18,11 +18,10 @@ class MyApp extends StatelessWidget {
         textTheme: GoogleFonts.poppinsTextTheme(),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            textStyle: TextStyle(
-              color: kWhiteColor,
-              fontSize: 18,
-              fontWeight: medium,
-            ),
+            elevation: 0,
+            foregroundColor: kWhiteColor,
+            backgroundColor: kPurpleColor,
+            textStyle: TextStyle(fontSize: 18, fontWeight: medium),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
             ),
