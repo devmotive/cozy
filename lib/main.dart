@@ -1,3 +1,4 @@
+import 'package:cozy/pages/home_page.dart';
 import 'package:cozy/pages/started_page.dart';
 import 'package:cozy/theme/theme_data.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: AppTheme.lightTheme,
-      routes: {StartedPage.routeName: (context) => StartedPage()},
+      routes: {
+        StartedPage.routeName: (context) => StartedPage(),
+        HomePage.routeName: (context) => HomePage(),
+      },
     );
   }
 }
