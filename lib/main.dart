@@ -1,3 +1,4 @@
+import 'package:cozy/pages/started_page.dart';
 import 'package:cozy/theme/colors.dart';
 import 'package:cozy/theme/typography.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
+      routes: {StartedPage.routeName: (context) => StartedPage()},
     );
   }
 }
