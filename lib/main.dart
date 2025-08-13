@@ -1,3 +1,5 @@
+import 'package:cozy/models/space.dart';
+import 'package:cozy/pages/detail_page.dart';
 import 'package:cozy/pages/home_page.dart';
 import 'package:cozy/pages/started_page.dart';
 import 'package:cozy/providers/recommended_space_provider.dart';
@@ -24,6 +26,9 @@ class MyApp extends StatelessWidget {
       routes: {
         StartedPage.routeName: (context) => StartedPage(),
         HomePage.routeName: (context) => HomePage(),
+        DetailPage.routeName: (context) => DetailPage(
+          space: ModalRoute.of(context)?.settings.arguments as Space,
+        ),
       },
     );
   }
