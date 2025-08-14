@@ -79,30 +79,43 @@ class _HomePageState extends State<HomePage> {
   /// Builds the error message widget.
   Widget _buildError(RecommendedSpaceProvider provider) {
     return Scaffold(
-      body: Center(
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 38),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.error_outline, color: Colors.red, size: 80),
-            SizedBox(height: 24),
+            Image.asset(
+              Assets.assetsImageError,
+              width: double.infinity,
+              fit: BoxFit.cover,
+            ),
+            SizedBox(height: 70),
             Text(
-              provider.errorMessage,
+              'Data Not Found',
               style: TextStyle(
                 color: kBlackColor,
-                fontSize: 18,
+                fontSize: 24,
                 fontWeight: medium,
+              ),
+            ),
+            SizedBox(height: 14),
+            Text(
+              'The information you requested could not be found.',
+              style: TextStyle(
+                color: kGreyColor,
+                fontSize: 16,
+                fontWeight: light,
               ),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 24),
-            ElevatedButton(
-              onPressed: () => provider.retry(),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: kPurpleColor,
-                padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+            SizedBox(height: 50),
+            SizedBox(
+              height: 50,
+              child: ElevatedButton(
+                onPressed: () => provider.retry(),
+                style: ElevatedButton.styleFrom(backgroundColor: kPurpleColor),
+                child: Text('Try Again'),
               ),
-              child: Text('Try Again'),
             ),
           ],
         ),
