@@ -158,7 +158,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           Text(
-            'Mencari kosan yang cozy',
+            'Find a cozy place to stay',
             style: TextStyle(
               color: kGreyColor,
               fontSize: 16,
