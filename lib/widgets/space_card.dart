@@ -13,9 +13,12 @@ class SpaceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: Implement navigation to space details page on tap.
-    return Row(
-      spacing: 20,
-      children: [_buildImageWithRating(), _buildSpaceDetails()],
+    return GestureDetector(
+      onTap: () => Navigator.pushNamed(context, '/detail', arguments: space),
+      child: Row(
+        spacing: 20,
+        children: [_buildImageWithRating(), _buildSpaceDetails()],
+      ),
     );
   }
 
