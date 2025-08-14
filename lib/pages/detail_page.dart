@@ -5,13 +5,20 @@ import 'package:cozy/theme/typography.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class DetailPage extends StatelessWidget {
+class DetailPage extends StatefulWidget {
   const DetailPage({super.key, required this.space});
 
   static const routeName = '/detail';
 
   /// The [Space] object containing the details to be displayed.
   final Space space;
+
+  @override
+  State<DetailPage> createState() => _DetailPageState();
+}
+
+class _DetailPageState extends State<DetailPage> {
+  bool _isFavorite = false;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +37,7 @@ class DetailPage extends StatelessWidget {
       padding: EdgeInsets.only(left: 24, top: 30, right: 24),
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: NetworkImage(space.imageUrl),
+          image: NetworkImage(widget.space.imageUrl),
           fit: BoxFit.cover,
         ),
       ),
@@ -44,9 +51,12 @@ class DetailPage extends StatelessWidget {
             onPressed: () => Navigator.pop(context),
           ),
           _buildCircleIconButton(
-            icon: Icons.favorite_border_outlined,
-            // TODO: Implement favorite functionality.
-            onPressed: () {},
+            icon: _isFavorite ? Icons.favorite : Icons.favorite_border_outlined,
+            color: _isFavorite ? kOrangeColor : kDarkGreyColor,
+            onPressed: () {
+              // TODO: Implement actual favorite functionality (e.g., API call, local storage)
+              setState(() => _isFavorite = !_isFavorite);
+            },
           ),
         ],
       ),
@@ -57,13 +67,14 @@ class DetailPage extends StatelessWidget {
   Widget _buildCircleIconButton({
     required IconData icon,
     required VoidCallback onPressed,
+    Color? color,
   }) {
     return Container(
       height: 40,
       width: 40,
       decoration: BoxDecoration(color: kWhiteColor, shape: BoxShape.circle),
       child: IconButton(
-        icon: Icon(icon, color: kDarkPurpleColor),
+        icon: Icon(icon, color: color ?? kDarkPurpleColor),
         iconSize: 20,
         onPressed: onPressed,
       ),
@@ -109,7 +120,7 @@ class DetailPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  space.name,
+                  widget.space.name,
                   style: TextStyle(
                     color: kBlackColor,
                     fontSize: 22,
@@ -119,7 +130,7 @@ class DetailPage extends StatelessWidget {
                 ),
                 Text.rich(
                   TextSpan(
-                    text: '\$${space.price}',
+                    text: '\$${widget.space.price}',
                     style: TextStyle(
                       color: kPurpleColor,
                       fontSize: 16,
@@ -146,7 +157,9 @@ class DetailPage extends StatelessWidget {
               return Image.asset(
                 Assets.assetsIconStar,
                 width: 20,
-                color: space.rating >= starNumber ? kOrangeColor : kGreyColor,
+                color: widget.space.rating >= starNumber
+                    ? kOrangeColor
+                    : kGreyColor,
               );
             }),
           ),
@@ -176,17 +189,17 @@ class DetailPage extends StatelessWidget {
             children: [
               _buildFacilityItem(
                 icon: Assets.assetsIconKitchen,
-                value: space.numberOfKitchens,
+                value: widget.space.numberOfKitchens,
                 label: 'kitchen',
               ),
               _buildFacilityItem(
                 icon: Assets.assetsIconBedroom,
-                value: space.numberOfBedrooms,
+                value: widget.space.numberOfBedrooms,
                 label: 'bedroom',
               ),
               _buildFacilityItem(
                 icon: Assets.assetsIconKitchen,
-                value: space.numberOfCupboards,
+                value: widget.space.numberOfCupboards,
                 label: 'cupboard',
               ),
             ],
@@ -249,18 +262,18 @@ class DetailPage extends StatelessWidget {
           height: 88,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
-            itemCount: space.photos.length,
+            itemCount: widget.space.photos.length,
             separatorBuilder: (context, index) => SizedBox(width: 18),
             // Builds each photo item.
             itemBuilder: (context, index) {
               return Padding(
                 padding: EdgeInsets.only(
-                  right: index == space.photos.length - 1 ? 24 : 0,
+                  right: index == widget.space.photos.length - 1 ? 24 : 0,
                 ),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(16),
                   child: Image.network(
-                    space.photos[index],
+                    widget.space.photos[index],
                     width: 110,
                     height: 88,
                     fit: BoxFit.cover,
@@ -294,7 +307,7 @@ class DetailPage extends StatelessWidget {
                 ),
               ),
               Text(
-                '${space.address}\n${space.city}',
+                '${widget.space.address}\n${widget.space.city}',
                 style: TextStyle(
                   color: kDarkGreyColor,
                   fontSize: 14,
@@ -316,7 +329,7 @@ class DetailPage extends StatelessWidget {
       width: 40,
       decoration: BoxDecoration(color: kLightGreyColor, shape: BoxShape.circle),
       child: IconButton(
-        onPressed: () => _launchUrl(space.mapUrl),
+        onPressed: () => _launchUrl(widget.space.mapUrl),
         iconSize: 22,
         color: kMediumGreyColor,
         icon: Icon(Icons.location_on),
@@ -331,7 +344,7 @@ class DetailPage extends StatelessWidget {
       width: double.infinity,
       margin: EdgeInsets.only(top: 10, right: 24, bottom: 40),
       child: ElevatedButton(
-        onPressed: () => _launchUrl('tel:${space.phone}'),
+        onPressed: () => _launchUrl('tel:${widget.space.phone}'),
         child: Text('Book Now'),
       ),
     );
