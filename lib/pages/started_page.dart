@@ -62,8 +62,8 @@ class StartedPage extends StatelessWidget {
   // _buildSubtitle displays a supporting tagline or description.
   Widget _buildSubtitle() {
     return Text(
-      'Stop membuang banyak waktu\n'
-      'pada tempat yang tidak habitable',
+      'Stop wasting a lot of time\n'
+      'in a place that is not habitable',
       style: TextStyle(color: kGreyColor, fontSize: 16, fontWeight: light),
     );
   }
