@@ -3,6 +3,7 @@ import 'package:cozy/models/space.dart';
 import 'package:cozy/theme/colors.dart';
 import 'package:cozy/theme/typography.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DetailPage extends StatelessWidget {
   const DetailPage({super.key, required this.space});
@@ -11,6 +12,13 @@ class DetailPage extends StatelessWidget {
 
   /// The [Space] object containing the details to be displayed.
   final Space space;
+
+  Future<void> _launchPhoneUrl(String phoneNumber) async {
+    final uri = Uri.parse('tel:$phoneNumber');
+    if (!await launchUrl(uri)) {
+      throw Exception('Could not launch $phoneNumber');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -331,9 +339,9 @@ class DetailPage extends StatelessWidget {
       width: double.infinity,
       margin: EdgeInsets.only(top: 10, right: 24, bottom: 40),
       child: ElevatedButton(
-        // TODO: Implement booking functionality.
-        onPressed: () {},
-        child: Text('Book Now')),
+        onPressed: () => _launchPhoneUrl(space.phone),
+        child: Text('Book Now'),
+      ),
     );
   }
 }
