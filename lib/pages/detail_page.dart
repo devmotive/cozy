@@ -31,34 +31,37 @@ class _DetailPageState extends State<DetailPage> {
 
   Widget _buildHeaderImage(BuildContext context) {
     // Container for the header image with back and favorite buttons.
-    return Container(
-      height: 350,
-      width: double.infinity,
-      padding: EdgeInsets.only(left: 24, top: 30, right: 24),
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: NetworkImage(widget.space.imageUrl),
-          fit: BoxFit.cover,
+    return Hero(
+      tag: widget.space.imageUrl,
+      child: Container(
+        height: 350,
+        width: double.infinity,
+        padding: EdgeInsets.only(left: 24, top: 30, right: 24),
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: NetworkImage(widget.space.imageUrl),
+            fit: BoxFit.cover,
+          ),
         ),
-      ),
-      alignment: Alignment.topCenter,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          _buildCircleIconButton(
-            icon: Icons.chevron_left,
-            // Navigates back to the previous screen.
-            onPressed: () => Navigator.pop(context),
-          ),
-          _buildCircleIconButton(
-            icon: _isFavorite ? Icons.favorite : Icons.favorite_border_outlined,
-            color: _isFavorite ? kOrangeColor : kDarkGreyColor,
-            onPressed: () {
-              // TODO: Implement actual favorite functionality (e.g., API call, local storage)
-              setState(() => _isFavorite = !_isFavorite);
-            },
-          ),
-        ],
+        alignment: Alignment.topCenter,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            _buildCircleIconButton(
+              icon: Icons.chevron_left,
+              // Navigates back to the previous screen.
+              onPressed: () => Navigator.pop(context),
+            ),
+            _buildCircleIconButton(
+              icon: _isFavorite ? Icons.favorite : Icons.favorite_border_outlined,
+              color: _isFavorite ? kOrangeColor : kDarkGreyColor,
+              onPressed: () {
+                // TODO: Implement actual favorite functionality (e.g., API call, local storage)
+                setState(() => _isFavorite = !_isFavorite);
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

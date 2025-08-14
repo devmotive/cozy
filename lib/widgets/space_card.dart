@@ -27,19 +27,22 @@ class SpaceCard extends StatelessWidget {
     // TODO: Add placeholder image for when space.imageUrl is invalid or loading.
     // TODO: Add error handling for NetworkImage.
     // Container for the image and rating badge.
-    return Container(
-      height: 110,
-      width: 130,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(18),
-        image: DecorationImage(
-          image: NetworkImage(space.imageUrl),
-          fit: BoxFit.cover,
+    return Hero(
+      tag: space.imageUrl,
+      child: Container(
+        height: 110,
+        width: 130,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(18),
+          image: DecorationImage(
+            image: NetworkImage(space.imageUrl),
+            fit: BoxFit.cover,
+          ),
         ),
+        alignment: Alignment.topRight,
+        // Display the rating badge on top of the image.
+        child: _buildRatingBadge(),
       ),
-      alignment: Alignment.topRight,
-      // Display the rating badge on top of the image.
-      child: _buildRatingBadge(),
     );
   }
 
