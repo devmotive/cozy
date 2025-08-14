@@ -13,13 +13,6 @@ class DetailPage extends StatelessWidget {
   /// The [Space] object containing the details to be displayed.
   final Space space;
 
-  Future<void> _launchPhoneUrl(String phoneNumber) async {
-    final uri = Uri.parse('tel:$phoneNumber');
-    if (!await launchUrl(uri)) {
-      throw Exception('Could not launch $phoneNumber');
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -323,8 +316,7 @@ class DetailPage extends StatelessWidget {
       width: 40,
       decoration: BoxDecoration(color: kLightGreyColor, shape: BoxShape.circle),
       child: IconButton(
-        // TODO: Implement map functionality.
-        onPressed: () {},
+        onPressed: () => _launchUrl(space.mapUrl),
         iconSize: 22,
         color: kMediumGreyColor,
         icon: Icon(Icons.location_on),
@@ -339,9 +331,18 @@ class DetailPage extends StatelessWidget {
       width: double.infinity,
       margin: EdgeInsets.only(top: 10, right: 24, bottom: 40),
       child: ElevatedButton(
-        onPressed: () => _launchPhoneUrl(space.phone),
+        onPressed: () => _launchUrl('tel:${space.phone}'),
         child: Text('Book Now'),
       ),
     );
+  }
+
+  // Launches the given URL.
+  // Throws an exception if the URL cannot be launched.
+  Future<void> _launchUrl(String url) async {
+    if (!await launchUrl(Uri.parse(url))) {
+      // TODO: Implement user-friendly error handling, e.g., show a SnackBar.
+      throw Exception('Could not launch $url');
+    }
   }
 }
